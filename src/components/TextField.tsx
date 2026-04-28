@@ -17,8 +17,11 @@ import { cn } from '../utils'
 
 export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string
+  /** Atributo HTML required (validación nativa). NO muestra asterisco visible. */
   required?: boolean
-  /** Asterisco azul claro tipo Figma A.3 (199:392) si required */
+  /** Si true, muestra asterisco visible al lado del label. Independiente de `required`. */
+  requiredIndicator?: boolean
+  /** Color del asterisco. Default brand-blue-light (#0798F9 Figma A.3). */
   requiredColor?: string
   leftIcon?: ReactNode
   rightAdornment?: ReactNode
@@ -37,6 +40,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     {
       label,
       required,
+      requiredIndicator = false,
       requiredColor = 'var(--color-brand-blue-light)',
       leftIcon,
       rightAdornment,
@@ -60,7 +64,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             className="text-[11px] font-normal leading-[20px] text-[color:var(--color-text-primary)]"
           >
             {label}
-            {required && (
+            {requiredIndicator && (
               <span aria-hidden className="ml-0.5" style={{ color: requiredColor }}>
                 *
               </span>
@@ -79,6 +83,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           <input
             ref={ref}
             id={inputId}
+            required={required}
             aria-invalid={error ? 'true' : undefined}
             aria-describedby={error ? errorId : undefined}
             className={cn(
