@@ -43,10 +43,15 @@
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
-    "next": ">=14"
+    "next": ">=14",
+    "@moraleja/tokens": "*"
+  },
+  "peerDependenciesMeta": {
+    "@moraleja/tokens": {
+      "optional": true
+    }
   },
   "dependencies": {
-    "@moraleja/tokens": "file:../moraleja-design-tokens",
     "clsx": "^2.1.1",
     "lucide-react": "^0.470.0"
   },
